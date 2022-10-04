@@ -1,6 +1,8 @@
-# **GuideShare - Django Rest API** - [Live Site](https://)
+# **GuideShare - Django Rest API** - [Live Site](https://guideshare-api.herokuapp.com/)
 
 # **Project Overview**
+
+Please [Click Here](https://github.com/lukebinmore/guideshare) to view the GuideShare React repository.
 
 # **Table Of Contents**
 - [**GuideShare - Django Rest API** - Live Site](#guideshare---django-rest-api---live-site)
