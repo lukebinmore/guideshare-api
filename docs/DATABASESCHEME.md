@@ -8,6 +8,7 @@
   - [**Post Table**](#post-table)
   - [**Category Table**](#category-table)
   - [**Comments Table**](#comments-table)
+  - [**Contact Forms Table**](#contact-forms-table)
 
 ***
 
@@ -36,5 +37,11 @@ Below are the planned fields for each table in the database managed by the API. 
 ## **Comments Table**
 
 ![Comments Table](/docs/databasetables/comment-table.png)
+
+***
+
+## **Contact Forms Table**
+
+![Contact Forms Table](/docs/databasetables/contact-form-table.png)
 
 ***

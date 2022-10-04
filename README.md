@@ -10,7 +10,6 @@ Please [Click Here](https://github.com/lukebinmore/guideshare) to view the Guide
 - [**Table Of Contents**](#table-of-contents)
 - [GuideShare API](#guideshare-api)
   - [**Planning Phase**](#planning-phase)
-  - [**Project Management**](#project-management)
   - [**Database Scheme**](#database-scheme)
   - [**Testing Results**](#testing-results)
   - [**Technologies Used**](#technologies-used)
@@ -23,10 +22,6 @@ Please [Click Here](https://github.com/lukebinmore/guideshare) to view the Guide
 # GuideShare API
 
 ## [**Planning Phase**](/docs/PLANNING.md)
-
-***
-
-## [**Project Management**](/docs/PROJECTMANAGEMENT.md)
 
 ***
 
