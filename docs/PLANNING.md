@@ -60,16 +60,32 @@ Based on the goals of the GuideShare site, the features and requirements of this
 
 ### **Development Process**
 
+This project will be developed in conjunction with the react based GuideSite project, utilizing the same iterative Agile process. The same project used to manage the React project will be used to manage this API's development.
+
+Similarly to the react project, Github's Milestones will be used to track Epics, and Issues will be used to track User Stories.
+
 ***
 
 ### **Testing Methodologies**
+
+The development of this API will follow the same testing methodologies as the GuideShare react project. Manual testing will be carried out during each iteration of development, with any bugs or issues being reported via the commit message "Bug Fix" with details of the found resolution in the commit notes.
+
+For bugs / issues found and fixed during development of this project, please [Click Here](https://github.com/search?q=repo%3Alukebinmore%2Fguideshare-api+%22Bug+Fix+-+%22&type=commits).
 
 ***
 
 ### **Periodic Reviews**
 
+Each iteration of development will span the same one week period as this projects coutnerpart, with the same review being held at the end of each iteration. Incomplete Epics and User Stories will be moved back into the backlog, and tasks will be assigned for the next iteration.
+
+To view the project (KanBan) for this site, please [Click Here](https://github.com/users/lukebinmore/projects/7/views/1).
+
 ***
 
 ### **Epics / User Stories**
+
+For Epics relating to this project, please [Click Here](https://github.com/lukebinmore/guideshare-api/milestones?state=open).
+
+For User Stories relating to this project, please [Click Here](https://github.com/lukebinmore/guideshare-api/issues?q=label%3A%22User+Story%22+).
 
 ***
