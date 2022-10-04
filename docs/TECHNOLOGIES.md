@@ -19,9 +19,18 @@
 
 ## **Applications**
 
+ - [Visual Studio Code](https://code.visualstudio.com/)
+   - IDE used for development.
+
 ***
 
 ## **Services**
+
+ - [GitHub](https://github.com/)
+   - Code version control.
+   - Project management.
+ - [Diagrams.Net](https://app.diagrams.net/)
+   - Creation of Database Tables.
 
 ***
 
