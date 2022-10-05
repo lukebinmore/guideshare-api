@@ -41,14 +41,10 @@ class ProfileDetailSerializer(serializers.ModelSerializer):
 class ProfileListSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source="owner.username")
     post_count = serializers.SerializerMethodField()
-    followers_count = serializers.SerializerMethodField()
     followed = serializers.SerializerMethodField()
 
     def get_post_count(self, obj):
         return obj.owner.posts.count()
-
-    def get_followers_count(self, obj):
-        return obj.owner.followers.count()
 
     def get_followed(self, obj):
         request = self.context["request"]
@@ -62,7 +58,6 @@ class ProfileListSerializer(serializers.ModelSerializer):
             "id",
             "owner",
             "post_count",
-            "followers_count",
             "picture",
             "created_at",
             "followed",
