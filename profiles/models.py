@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, pre_delete
 
 
 class Profile(models.Model):
@@ -36,4 +36,11 @@ def create_profile(sender, instance, created, **kwargs):
         )
 
 
+def disable_account(sender, instance, **kwargs):
+    user = User.objects.filter(id=instance.owner.id).first()
+    user.is_active = False
+    user.save()
+
+
 post_save.connect(create_profile, sender=User)
+pre_delete.connect(disable_account, sender=Profile)
