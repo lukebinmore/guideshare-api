@@ -14,10 +14,7 @@ class ProfileDetail(generics.RetrieveUpdateDestroyAPIView):
 class ProfileList(generics.ListAPIView):
     serializer_class = serializers.ProfileListSerializer
     filter_backends = [filters.OrderingFilter]
-    ordering_fields = [
-        "owner",
-        "popularity"
-    ]
+    ordering_fields = ["owner", "popularity"]
 
     def get_queryset(self):
         return (
