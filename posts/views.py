@@ -4,6 +4,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from .models import Post
 from . import serializers
 from guideshareapi.permissions import IsOwnerOrReadOnly
+from rest_framework.permissions import IsAuthenticated
 
 
 class PostList(generics.ListAPIView):
@@ -24,4 +25,10 @@ class PostList(generics.ListAPIView):
 class PostDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = serializers.PostSerializer
     permission_classes = [IsOwnerOrReadOnly]
+    queryset = Post.objects.all()
+
+
+class PostCreate(generics.CreateAPIView):
+    serializer_class = serializers.PostSerializer
+    permission_classes = [IsAuthenticated]
     queryset = Post.objects.all()

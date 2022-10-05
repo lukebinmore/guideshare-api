@@ -13,6 +13,9 @@ class PostSerializer(serializers.ModelSerializer):
     def get_dislikes_count(self, obj):
         return obj.dislikes.count()
 
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+
     class Meta:
         model = Post
         fields = "__all__"
