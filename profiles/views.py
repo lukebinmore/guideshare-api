@@ -1,4 +1,4 @@
-from rest_framework import generics
+from rest_framework import generics, filters
 from django.db.models import Count
 from .models import Profile
 from . import serializers
@@ -13,6 +13,11 @@ class ProfileDetail(generics.RetrieveUpdateDestroyAPIView):
 
 class ProfileList(generics.ListAPIView):
     serializer_class = serializers.ProfileListSerializer
+    filter_backends = [filters.OrderingFilter]
+    ordering_fields = [
+        "owner",
+        "popularity"
+    ]
 
     def get_queryset(self):
         return (
@@ -21,5 +26,5 @@ class ProfileList(generics.ListAPIView):
                 popularity=Count("owner__liked_posts")
                 - Count("owner__disliked_posts")
             )
-            .order_by("popularity")
+            .order_by("owner")
         )
