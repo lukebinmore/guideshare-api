@@ -1,9 +1,10 @@
 from rest_framework import generics
-from rest_framework.response import Response
 from .models import Profile
 from . import serializers
+from guideshareapi.permissions import IsOwnerOrReadOnly
 
 
-class ProfileSingle(generics.RetrieveUpdateDestroyAPIView):
-    serializer_class = serializers.ProfileSingleSerializer
+class ProfileDetail(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = serializers.ProfileDetailSerializer
+    permission_classes = [IsOwnerOrReadOnly]
     queryset = Profile.objects.all()
