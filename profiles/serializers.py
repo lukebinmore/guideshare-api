@@ -14,7 +14,7 @@ class ProfileDetailSerializer(serializers.ModelSerializer):
         return obj.owner == request.user
 
     def get_post_count(self, obj):
-        return 0
+        return obj.owner.posts.count()
 
     def get_following_count(self, obj):
         return obj.following.count()
@@ -45,7 +45,7 @@ class ProfileListSerializer(serializers.ModelSerializer):
     followed = serializers.SerializerMethodField()
 
     def get_post_count(self, obj):
-        return 0
+        return obj.owner.posts.count()
 
     def get_followers_count(self, obj):
         return obj.owner.followers.count()
