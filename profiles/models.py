@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from posts.models import Post
 from django.db.models.signals import post_save, pre_delete
 
 
@@ -18,6 +19,9 @@ class Profile(models.Model):
     )
     following = models.ManyToManyField(
         User, related_name="followers", blank=True
+    )
+    saved_posts = models.ManyToManyField(
+        Post, related_name="post_saves", blank=True
     )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
