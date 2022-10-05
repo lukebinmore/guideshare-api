@@ -3,6 +3,7 @@ from django.db.models import Count
 from django_filters.rest_framework import DjangoFilterBackend
 from .models import Post
 from . import serializers
+from guideshareapi.permissions import IsOwnerOrReadOnly
 
 
 class PostList(generics.ListAPIView):
@@ -18,3 +19,9 @@ class PostList(generics.ListAPIView):
     queryset = Post.objects.annotate(
         likes_count=Count("likes"), dislikes_count=Count("dislikes")
     )
+
+
+class PostDetail(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = serializers.PostSerializer
+    permission_classes = [IsOwnerOrReadOnly]
+    queryset = Post.objects.all()
