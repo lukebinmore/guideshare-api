@@ -22,6 +22,17 @@ class ProfileDetailSerializer(serializers.ModelSerializer):
     def get_followers_count(self, obj):
         return obj.owner.followers.count()
 
+    def validate_image(self, value):
+        if value.size > 1024 * 1024 * 5:
+            raise serializers.ValidationError(
+                "Image is too large, please choose an image 5MB or smaller."
+            )
+        if value.width > 4096 or value.height > 4096:
+            raise serializers.ValidationError(
+                "Image is too large, maxium resolution is 4096px X 4096px."
+            )
+        return value
+
     class Meta:
         model = Profile
         fields = "__all__"
