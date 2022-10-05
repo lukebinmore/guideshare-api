@@ -16,6 +16,9 @@ class Profile(models.Model):
         upload_to=image_dir,
         default="/profiles/default/placeholder",
     )
+    following = models.ManyToManyField(
+        User, related_name="followers", blank=True
+    )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
