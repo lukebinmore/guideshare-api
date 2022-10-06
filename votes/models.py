@@ -35,5 +35,6 @@ class Vote(models.Model):
         ]
 
     def __str__(self):
-        target = self.post if self.post else self.comment
-        return f"{self.owner} {self.vote}d {target}"
+        vote = "like" if self.vote == "like" else "dislike"
+        item = self.post.id if self.post else self.comment.id
+        return f"{self.owner} {vote}'d {item}"

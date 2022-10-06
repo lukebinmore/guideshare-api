@@ -4,6 +4,14 @@ from .models import Vote
 
 @admin.register(Vote)
 class VoteAdmin(admin.ModelAdmin):
+    list_display = (
+        "id",
+        "owner",
+        "post",
+        "comment",
+        "vote",
+        "created_at",
+    )
     list_filter = (
         "owner",
         "post",
