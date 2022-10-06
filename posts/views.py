@@ -15,20 +15,31 @@ class PostList(generics.ListAPIView):
         filters.SearchFilter,
     ]
     ordering_fields = ["title", "created_at", "likes_count", "dislikes_count"]
-    filterset_fields = ["owner__followers", "post_saves"]
+    filterset_fields = ["owner__followers", "post_saves", "category"]
     search_fields = ["title", "owner__username", "category__title"]
 
-    def get_queryset(self):
-        return Post.objects.annotate(
-            likes_count=Count("post_votes", filter=Q(post_votes__vote=0)),
-            dislikes_count=Count("post_votes", filter=Q(post_votes__vote=1)),
-        )
+    queryset = Post.objects.annotate(
+        likes_count=Count(
+            "post_votes", filter=Q(post_votes__vote=0), distinct=True
+        ),
+        dislikes_count=Count(
+            "post_votes", filter=Q(post_votes__vote=1), distinct=True
+        ),
+    )
 
 
 class PostDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = serializers.PostSerializer
     permission_classes = [IsOwnerOrReadOnly]
-    queryset = Post.objects.all()
+    queryset = Post.objects.annotate(
+        likes_count=Count(
+            "post_votes", filter=Q(post_votes__vote=0), distinct=True
+        ),
+        dislikes_count=Count(
+            "post_votes", filter=Q(post_votes__vote=1), distinct=True
+        ),
+        comments_count=Count("post_comments", distinct=True),
+    )
 
 
 class PostCreate(generics.CreateAPIView):
