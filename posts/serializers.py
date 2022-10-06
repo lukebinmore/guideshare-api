@@ -8,10 +8,10 @@ class PostSerializer(serializers.ModelSerializer):
     dislikes_count = serializers.SerializerMethodField()
 
     def get_likes_count(self, obj):
-        return obj.votes.filter(vote="likes").count()
+        return obj.post_votes.filter(vote=0).count()
 
     def get_dislikes_count(self, obj):
-        return obj.votes.filter(vote="dislike").count()
+        return obj.post_votes.filter(vote=0).count()
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
