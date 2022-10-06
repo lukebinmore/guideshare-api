@@ -1,5 +1,5 @@
 from rest_framework import generics, filters
-from django.db.models import Count
+from django.db.models import Count, Q
 from django_filters.rest_framework import DjangoFilterBackend
 from .models import Post
 from . import serializers
@@ -19,13 +19,10 @@ class PostList(generics.ListAPIView):
     search_fields = ["title", "owner__username", "category__title"]
 
     def get_queryset(self):
-        likes = Post.objects.filter(post_votes=0).annotate(
-            likes_count=Count("owner__posts__post_votes"),
+        return Post.objects.annotate(
+            likes_count=Count(Q(post_votes=0)),
+            dislikes_count=Count(Q(post_votes=1))
         )
-        dislikes = Post.objects.filter(post_votes=1).annotate(
-            dislikes_count=Count("owner__posts__post_votes"),
-        )
-        return likes + dislikes
 
 
 class PostDetail(generics.RetrieveUpdateDestroyAPIView):
