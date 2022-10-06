@@ -17,12 +17,6 @@ class Post(models.Model):
         default="/posts/default/placeholder",
     )
     wip = models.BooleanField(default=False)
-    likes = models.ManyToManyField(
-        User, related_name="liked_posts", blank=True
-    )
-    dislikes = models.ManyToManyField(
-        User, related_name="disliked_posts", blank=True
-    )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -33,10 +27,10 @@ class Post(models.Model):
         return self.title
 
     def post_likes(self):
-        return self.likes.count()
+        return self.post_votes.filter(vote="like").count()
 
     def post_dislikes(self):
-        return self.dislikes.count()
+        return self.votes.filter(vote="dislike").count()
 
 
 class Category(models.Model):

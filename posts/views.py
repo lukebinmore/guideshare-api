@@ -17,9 +17,15 @@ class PostList(generics.ListAPIView):
     ordering_fields = ["title", "created_at", "likes_count", "dislikes_count"]
     filterset_fields = ["owner__followers", "post_saves"]
     search_fields = ["title", "owner__username", "category__title"]
-    queryset = Post.objects.annotate(
-        likes_count=Count("likes"), dislikes_count=Count("dislikes")
-    )
+
+    def get_queryset(self):
+        likes = Post.objects.filter(votes="like").annotate(
+            likes_count=Count("owner__posts__votes"),
+        )
+        dislikes = Post.objects.filter(votes="dislike").annotate(
+            dislikes_count=Count("owner__posts__votes"),
+        )
+        return likes + dislikes
 
 
 class PostDetail(generics.RetrieveUpdateDestroyAPIView):
