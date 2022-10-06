@@ -27,10 +27,10 @@ class Post(models.Model):
         return self.title
 
     def post_likes(self):
-        return self.post_votes.filter(vote="like").count()
+        return self.post_votes.filter(vote=0).count()
 
     def post_dislikes(self):
-        return self.votes.filter(vote="dislike").count()
+        return self.post_votes.filter(vote=1).count()
 
 
 class Category(models.Model):

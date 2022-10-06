@@ -19,11 +19,11 @@ class PostList(generics.ListAPIView):
     search_fields = ["title", "owner__username", "category__title"]
 
     def get_queryset(self):
-        likes = Post.objects.filter(votes="like").annotate(
-            likes_count=Count("owner__posts__votes"),
+        likes = Post.objects.filter(post_votes=0).annotate(
+            likes_count=Count("owner__posts__post_votes"),
         )
-        dislikes = Post.objects.filter(votes="dislike").annotate(
-            dislikes_count=Count("owner__posts__votes"),
+        dislikes = Post.objects.filter(post_votes=1).annotate(
+            dislikes_count=Count("owner__posts__post_votes"),
         )
         return likes + dislikes
 
