@@ -1,5 +1,6 @@
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from guideshareapi.permissions import IsOwnerOrReadOnly
 from .models import Vote
 from . import serializers
 
@@ -11,3 +12,9 @@ class VoteCreate(generics.CreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
+
+
+class VoteRetrieveDestroy(generics.RetrieveDestroyAPIView):
+    serializer_class = serializers.VoteSerializer
+    permission_classes = [IsOwnerOrReadOnly]
+    queryset = Vote.objects.all()

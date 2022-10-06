@@ -9,11 +9,9 @@ class VoteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Vote
         fields = ["id", "owner", "post", "comment", "vote"]
-    
+
     def create(self, validated_data):
         try:
             return super().create(validated_data)
         except IntegrityError:
-            raise serializers.ValidationError({
-                'detail': "Duplicate entry"
-            })
+            raise serializers.ValidationError({"detail": "Duplicate entry"})
