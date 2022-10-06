@@ -20,8 +20,8 @@ class PostList(generics.ListAPIView):
 
     def get_queryset(self):
         return Post.objects.annotate(
-            likes_count=Count(Q(post_votes=0)),
-            dislikes_count=Count(Q(post_votes=1))
+            likes_count=Count("post_votes", filter=Q(post_votes__vote=0)),
+            dislikes_count=Count("post_votes", filter=Q(post_votes__vote=1)),
         )
 
 

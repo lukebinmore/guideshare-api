@@ -22,8 +22,14 @@ class ProfileList(generics.ListAPIView):
         return (
             Profile.objects.exclude(owner=self.request.user)
             .annotate(
-                popularity=Count(Q(owner__posts__post_votes=0))
-                - Count(Q(owner__posts__post_votes=1))
+                popularity=Count(
+                    "owner__posts__post_votes",
+                    filter=Q(owner__posts__post_votes__vote=0),
+                )
+                - Count(
+                    "owner__posts__post_votes",
+                    filter=Q(owner__posts__post_votes__vote=1),
+                )
             )
             .order_by("owner")
         )
