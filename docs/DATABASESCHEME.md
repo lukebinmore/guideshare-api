@@ -37,7 +37,7 @@ Below are the planned fields for each table in the database managed by the API. 
 
 ## **Votes Table**
 
-![Votes Table](/docs/databasetables/votes-table.png)
+![Votes Table](/docs/databasetables/vote-table.png)
 
 ***
 
