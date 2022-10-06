@@ -1,6 +1,6 @@
 from rest_framework import generics, filters
 from django_filters.rest_framework import DjangoFilterBackend
-from django.db.models import Count
+from django.db.models import Count, Q
 from .models import Profile
 from . import serializers
 from guideshareapi.permissions import IsOwnerOrReadOnly
@@ -22,8 +22,8 @@ class ProfileList(generics.ListAPIView):
         return (
             Profile.objects.exclude(owner=self.request.user)
             .annotate(
-                popularity=Count("owner__liked_posts")
-                - Count("owner__disliked_posts")
+                popularity=Count(Q(owner__posts__post_votes=0))
+                - Count(Q(owner__posts__post_votes=1))
             )
             .order_by("owner")
         )
