@@ -28,7 +28,10 @@ class Migration(migrations.Migration):
                         verbose_name="ID",
                     ),
                 ),
-                ("vote", models.IntegerField(choices=[(0, "like"), (1, "dislike")])),
+                (
+                    "vote",
+                    models.IntegerField(choices=[(0, "like"), (1, "dislike")]),
+                ),
                 ("created_at", models.DateTimeField(auto_now_add=True)),
                 (
                     "comment",

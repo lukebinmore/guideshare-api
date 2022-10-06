@@ -3,11 +3,13 @@ from django.contrib.auth.models import User
 from posts.models import Post
 from comments.models import Comment
 
-CHOICES = ((0, "like"), (1,"dislike"))
+CHOICES = ((0, "like"), (1, "dislike"))
 
 
 class Vote(models.Model):
-    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_votes")
+    owner = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="user_votes"
+    )
     post = models.ForeignKey(
         Post,
         on_delete=models.CASCADE,
