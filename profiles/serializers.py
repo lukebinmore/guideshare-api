@@ -5,22 +5,13 @@ from .models import Profile
 class ProfileDetailSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source="owner.username")
     is_owner = serializers.SerializerMethodField()
-    post_count = serializers.SerializerMethodField()
-    following_count = serializers.SerializerMethodField()
-    followers_count = serializers.SerializerMethodField()
+    post_count = serializers.ReadOnlyField(default=0)
+    following_count = serializers.ReadOnlyField(default=0)
+    followers_count = serializers.ReadOnlyField(default=0)
 
     def get_is_owner(self, obj):
         request = self.context["request"]
         return obj.owner == request.user
-
-    def get_post_count(self, obj):
-        return obj.owner.posts.count()
-
-    def get_following_count(self, obj):
-        return obj.following.count()
-
-    def get_followers_count(self, obj):
-        return obj.owner.followers.count()
 
     def validate_image(self, value):
         if value.size > 1024 * 1024 * 5:
@@ -40,17 +31,12 @@ class ProfileDetailSerializer(serializers.ModelSerializer):
 
 class ProfileListSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source="owner.username")
-    post_count = serializers.SerializerMethodField()
+    post_count = serializers.ReadOnlyField(default=0)
     followed = serializers.SerializerMethodField()
 
-    def get_post_count(self, obj):
-        return obj.owner.posts.count()
-
     def get_followed(self, obj):
-        request = self.context["request"]
-        return (
-            True if obj.owner.followers.filter(owner=request.user) else False
-        )
+        user = self.context["request"].user
+        return True if obj.owner.followers.filter(owner=user) else False
 
     class Meta:
         model = Profile

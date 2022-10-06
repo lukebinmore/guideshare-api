@@ -9,7 +9,11 @@ from guideshareapi.permissions import IsOwnerOrReadOnly
 class ProfileDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = serializers.ProfileDetailSerializer
     permission_classes = [IsOwnerOrReadOnly]
-    queryset = Profile.objects.all()
+    queryset = Profile.objects.annotate(
+        post_count=Count("owner__posts", distinct=True),
+        following_count=Count("following", distinct=True),
+        followers_count=Count("owner__followers", distinct=True),
+    )
 
 
 class ProfileList(generics.ListAPIView):
@@ -22,14 +26,17 @@ class ProfileList(generics.ListAPIView):
         return (
             Profile.objects.exclude(owner=self.request.user)
             .annotate(
+                post_count=Count("owner__posts", distinct=True),
                 popularity=Count(
                     "owner__posts__post_votes",
                     filter=Q(owner__posts__post_votes__vote=0),
+                    distinct=True,
                 )
                 - Count(
                     "owner__posts__post_votes",
                     filter=Q(owner__posts__post_votes__vote=1),
-                )
+                    distinct=True,
+                ),
             )
             .order_by("owner")
         )
