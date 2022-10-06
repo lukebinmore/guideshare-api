@@ -7,6 +7,7 @@
   - [**Profile Table**](#profile-table)
   - [**Post Table**](#post-table)
   - [**Category Table**](#category-table)
+  - [**Votes Table**](#votes-table)
   - [**Comments Table**](#comments-table)
   - [**Contact Forms Table**](#contact-forms-table)
 
@@ -31,6 +32,12 @@ Below are the planned fields for each table in the database managed by the API. 
 ## **Category Table**
 
 ![Category Table](/docs/databasetables/category-table.png)
+
+***
+
+## **Votes Table**
+
+![Votes Table](/docs/databasetables/votes-table.png)
 
 ***
 
