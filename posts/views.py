@@ -25,7 +25,7 @@ class PostList(generics.ListAPIView):
         dislikes_count=Count(
             "post_votes", filter=Q(post_votes__vote=1), distinct=True
         ),
-    )
+    ).order_by("-created_at")
 
 
 class PostDetail(generics.RetrieveUpdateDestroyAPIView):

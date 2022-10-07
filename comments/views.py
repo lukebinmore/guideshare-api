@@ -19,7 +19,7 @@ class CommentList(generics.ListCreateAPIView):
         dislikes_count=Count(
             "comment_votes", filter=Q(comment_votes__vote=1), distinct=True
         ),
-    )
+    ).order_by("-created_at")
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
