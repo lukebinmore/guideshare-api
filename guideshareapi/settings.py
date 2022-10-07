@@ -17,8 +17,8 @@ import dj_database_url
 if os.path.exists("env.py"):
     import env
 
-# Set dev to false if DEV is not in environment variables, true if it is
-dev = False if "DEV" not in os.environ else True
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = False if "DEV" not in os.environ else True
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -28,11 +28,28 @@ CLOUDINARY_STORAGE = {"CLOUDINARY_URL": os.environ.get("CLOUDINARY_URL")}
 MEDIA_URL = "/guideshare/"
 DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
 
+# Rest Framework Settings
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        (
+            "rest_framework.authentication.SessionAuthentication"
+            if DEBUG
+            else "dj_rest_auth.jwt_auth.JWTCookieAuthentication"
+        )
+    ]
+}
+
+REST_USE_JWT = True
+JWT_AUTH_SECURE = True
+JWT_AUTH_COOKIE = "guideshare-auth"
+JWT_AUTH_REFRESH_COOKIE = "guideshare-refresh-token"
+
+REST_AUTH_SERIALIZERS = {
+    "USER_DETAIL_SERIALIZER": "guideshareapi.serializers.CurrentUserSerializer"
+}
+
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get("SECRET_KEY")
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = dev
 
 # Hosts django is allowed to run on
 ALLOWED_HOSTS = [
@@ -51,12 +68,21 @@ INSTALLED_APPS = [
     "cloudinary",
     "rest_framework",
     "django_filters",
+    "rest_framework.authtoken",
+    "dj_rest_auth",
+    "django.contrib.sites",
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
+    "dj_rest_auth.registration",
     "profiles",
     "posts",
     "comments",
     "votes",
     "contactforms",
 ]
+
+SITE_ID = 1
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -91,7 +117,7 @@ WSGI_APPLICATION = "guideshareapi.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-if dev:
+if DEBUG:
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
