@@ -51,6 +51,7 @@ REST_USE_JWT = True
 JWT_AUTH_SECURE = True
 JWT_AUTH_COOKIE = "guideshare-auth"
 JWT_AUTH_REFRESH_COOKIE = "guideshare-refresh-token"
+JWT_AUTH_SAMESITE = "None"
 
 REST_AUTH_SERIALIZERS = {
     "USER_DETAIL_SERIALIZER": "guideshareapi.serializers.CurrentUserSerializer"
@@ -63,6 +64,12 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 ALLOWED_HOSTS = [
     os.environ.get("ALLOWED_HOST"),
 ]
+
+CORS_ALLOWED_ORIGINS = [
+    os.environ.get("CLIENT_ORIGIN")
+]
+
+CORS_ALLOW_CREDENTIALS = True
 
 # Application definition
 INSTALLED_APPS = [
@@ -83,6 +90,7 @@ INSTALLED_APPS = [
     "allauth.account",
     "allauth.socialaccount",
     "dj_rest_auth.registration",
+    "corsheaders",
     "profiles",
     "posts",
     "comments",
@@ -93,6 +101,7 @@ INSTALLED_APPS = [
 SITE_ID = 1
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
