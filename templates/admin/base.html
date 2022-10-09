@@ -1,0 +1,33 @@
+{% extends 'admin/base.html' %} {% block extrahead %}{{ block.super }}
+<style>
+  :root {
+    --primary: #3ad555;
+    --secondary: #ff7200;
+    --accent: #fff;
+    --primary-fg: #000;
+    --body-fg: #000;
+    --body-bg: #fff;
+    --body-quiet-color: #000;
+    --header-color: #000;
+    --link-fg: #000;
+    --link-hover-color: var(--secondary);
+    --breadcrumbs-link-fg: #000;
+    --breadcrumbs-fg: #000;
+    --hairline-color: #dddddd;
+    --border-color: #dddddd;
+    --darkened-bg: #dddddd;
+    --selected-row: var(--secondary);
+    --button-fg: #fff;
+    --button-bg: var(--secondary);
+    --default-button-hover-bg: #609ab6;
+    --selected-bg: var(--darkened-bg);
+    --close-button-bg: var(--secondary);
+  }
+
+  a,
+  p {
+    font-weight: 900;
+    font-size: 110%;
+  }
+</style>
+{% endblock %}
