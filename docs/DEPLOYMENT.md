@@ -89,6 +89,7 @@ After setting up Cloudinary, we now have the information and accounts required t
   - Select the option to connect Heroku to Github, and sign in with your GitHub details.
   - In the repo-search, enter the name of your github repository and select search. Select Connect on the correct repository.
   - ![Repo Search](./deployment/heroku-repo-search.png)
+- Step 6 - Deploy
   - Select the option to Deploy Branch at the bottom of the page, for the first run to ensure deployment is successful.
   - ![Manual Deploy](./deployment/heroku-deploy-manual.png)
   - After the deployment succeeds, select the Enable Automatic Deploys option to enable automatic deploys of future updates to the repository.
