@@ -8,7 +8,7 @@ from .settings import (
 )
 
 
-@api_view(["post"])
+@api_view(["POST"])
 def logout_route(request):
     response = Response()
     response.set_cookie(
@@ -17,7 +17,7 @@ def logout_route(request):
         httponly=True,
         expires="Thu, 01 Jan 1970 00:00:00 GMT",
         max_age=0,
-        samesime=JWT_AUTH_SAMESITE,
+        samesite=JWT_AUTH_SAMESITE,
         secure=JWT_AUTH_SECURE,
     )
     response.set_cookie(
@@ -26,7 +26,7 @@ def logout_route(request):
         httponly=True,
         expires="Thu, 01 Jan 1970 00:00:00 GMT",
         max_age=0,
-        samesime=JWT_AUTH_SAMESITE,
+        samesite=JWT_AUTH_SAMESITE,
         secure=JWT_AUTH_SECURE,
     )
     return response
