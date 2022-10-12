@@ -17,10 +17,13 @@ from django.contrib import admin
 from django.urls import include, path, reverse_lazy
 from django.views.generic.base import RedirectView
 
+from guideshareapi.views import logout_route
+
 urlpatterns = [
     path("", RedirectView.as_view(url=reverse_lazy("admin:index"))),
     path("admin/", admin.site.urls),
     path("api-auth/", include("rest_framework.urls")),
+    path("auth/logout/", logout_route),
     path("auth/", include("dj_rest_auth.urls")),
     path("auth/registration/", include("dj_rest_auth.registration.urls")),
     path("", include("profiles.urls")),
