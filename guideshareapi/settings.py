@@ -50,7 +50,7 @@ JWT_AUTH_REFRESH_COOKIE = "guideshare-refresh-token"
 JWT_AUTH_SAMESITE = "None"
 
 REST_AUTH_SERIALIZERS = {
-    "USER_DETAIL_SERIALIZER": "guideshareapi.serializers.CurrentUserSerializer"
+    "USER_DETAILS_SERIALIZER": "guideshareapi.serializers.CurrentUserSerializer"
 }
 
 # SECURITY WARNING: keep the secret key used in production secret!
