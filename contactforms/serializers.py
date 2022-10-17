@@ -8,4 +8,12 @@ class ContactFormSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ContactForm
-        fields = "__all__"
+        fields = [
+            "title",
+            "username",
+            "email",
+            "first_name",
+            "last_name",
+            "reason",
+            "content",
+        ]
