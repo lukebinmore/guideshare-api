@@ -25,7 +25,7 @@ class ContactForm(models.Model):
     last_name = models.CharField(max_length=15, blank=True, null=True)
     reason = models.IntegerField(choices=REASON_CHOICES)
     content = models.TextField(max_length=512)
-    status = models.IntegerField(choices=STATUS_CHOICES)
+    status = models.IntegerField(choices=STATUS_CHOICES, default="0")
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
