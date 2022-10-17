@@ -19,9 +19,7 @@ STATUS_CHOICES = (
 
 class ContactForm(models.Model):
     title = models.CharField(max_length=50)
-    user = models.ForeignKey(
-        User, on_delete=models.CASCADE, blank=True, null=True
-    )
+    username = models.CharField(max_length=25, blank=True, null=True)
     email = models.EmailField()
     first_name = models.CharField(max_length=15, blank=True, null=True)
     last_name = models.CharField(max_length=15, blank=True, null=True)
