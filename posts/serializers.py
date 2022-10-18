@@ -33,7 +33,7 @@ class PostSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError(
                 "Image is too large, please choose an image 5MB or smaller."
             )
-        if value.width > 4096 or value.height > 2048:
+        if value.image.width > 4096 or value.image.height > 2048:
             raise serializers.ValidationError(
                 "Image is too large, maxium resolution is 4096px X 2048px."
             )
