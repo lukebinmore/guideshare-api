@@ -44,6 +44,7 @@ if not DEBUG:
     ]
 
 REST_USE_JWT = True
+OLD_PASSWORD_FIELD_ENABLED = True
 JWT_AUTH_SECURE = True
 JWT_AUTH_COOKIE = "guideshare-auth"
 JWT_AUTH_REFRESH_COOKIE = "guideshare-refresh-token"
