@@ -50,13 +50,14 @@ class PostSerializer(serializers.ModelSerializer):
 class PostListSerializer(serializers.ModelSerializer):
     likes_count = serializers.ReadOnlyField(default=0)
     dislikes_count = serializers.ReadOnlyField(default=0)
+    category_title = serializers.ReadOnlyField(source="category.title")
 
     class Meta:
         model = Post
         fields = [
             "id",
             "title",
-            "category",
+            "category_title",
             "cover_image",
             "likes_count",
             "dislikes_count",
