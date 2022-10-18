@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 class Post(models.Model):
     def image_dir(self, filename):
-        return f"posts/{self.id}/{filename}"
+        return f"posts/{self.owner.id}/{filename}"
 
     owner = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="posts"
