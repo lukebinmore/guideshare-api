@@ -50,7 +50,6 @@ class PostSerializer(serializers.ModelSerializer):
 class PostListSerializer(serializers.ModelSerializer):
     likes_count = serializers.ReadOnlyField(default=0)
     dislikes_count = serializers.ReadOnlyField(default=0)
-    profile_id = serializers.ReadOnlyField(source="owner.profile.id")
 
     class Meta:
         model = Post
@@ -61,7 +60,6 @@ class PostListSerializer(serializers.ModelSerializer):
             "cover_image",
             "likes_count",
             "dislikes_count",
-            "profile_id",
         ]
 
 
