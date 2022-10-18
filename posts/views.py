@@ -54,3 +54,4 @@ class PostCreate(generics.CreateAPIView):
 class CategoryList(generics.ListAPIView):
     serializer_class = serializers.CategoryListSerializer
     queryset = Category.objects.all().order_by("title")
+    pagination_class = None
