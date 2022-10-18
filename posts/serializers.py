@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Post
+from .models import Category, Post
 from votes.models import Vote
 
 
@@ -63,3 +63,9 @@ class PostListSerializer(serializers.ModelSerializer):
             "dislikes_count",
             "profile_id",
         ]
+
+
+class CategoryListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = ["id", "title"]

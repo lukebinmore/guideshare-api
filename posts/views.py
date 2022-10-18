@@ -1,7 +1,7 @@
 from rest_framework import generics, filters
 from django.db.models import Count, Q
 from django_filters.rest_framework import DjangoFilterBackend
-from .models import Post
+from .models import Category, Post
 from . import serializers
 from guideshareapi.permissions import IsOwnerOrReadOnly
 from rest_framework.permissions import IsAuthenticated
@@ -49,3 +49,8 @@ class PostCreate(generics.CreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
+
+
+class CategoryList(generics.ListAPIView):
+    serializer_class = serializers.CategoryListSerializer
+    queryset = Category.objects.all().order_by("title")
