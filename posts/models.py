@@ -34,7 +34,7 @@ class Post(models.Model):
 
 
 class Category(models.Model):
-    title = models.CharField(max_length=15)
+    title = models.CharField(max_length=25)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
