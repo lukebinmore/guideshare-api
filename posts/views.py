@@ -14,7 +14,13 @@ class PostList(generics.ListAPIView):
         DjangoFilterBackend,
         filters.SearchFilter,
     ]
-    ordering_fields = ["title", "created_at", "likes_count", "dislikes_count"]
+    ordering_fields = [
+        "title",
+        "title_length",
+        "created_at",
+        "likes_count",
+        "dislikes_count",
+    ]
     filterset_fields = ["owner__followers", "post_saves", "category"]
     search_fields = ["title", "owner__username", "category__title"]
 
@@ -25,6 +31,7 @@ class PostList(generics.ListAPIView):
         dislikes_count=Count(
             "post_votes", filter=Q(post_votes__vote=1), distinct=True
         ),
+        title_length=Count("title"),
     ).order_by("-created_at")
 
 
