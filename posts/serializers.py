@@ -6,7 +6,11 @@ from votes.models import Vote
 class PostSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source="owner.username")
     is_owner = serializers.SerializerMethodField()
-    profile_id = serializers.ReadOnlyField(source="owner.profile_id")
+    profile_id = serializers.ReadOnlyField(source="owner.profile.id")
+    profile_picture = serializers.ReadOnlyField(
+        source="owner.profile.picture.url"
+    )
+    category_title = serializers.ReadOnlyField(source="category.title")
     likes_count = serializers.ReadOnlyField(default=0)
     like_id = serializers.SerializerMethodField()
     dislikes_count = serializers.ReadOnlyField(default=0)
