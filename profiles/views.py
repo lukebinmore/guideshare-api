@@ -12,14 +12,14 @@ class ProfileDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Profile.objects.annotate(
         post_count=Count("owner__posts", distinct=True),
         following_count=Count("following", distinct=True),
-        followers_count=Count("owner__followers", distinct=True),
+        followers_count=Count("followers", distinct=True),
     )
 
 
 class ProfileList(generics.ListAPIView):
     serializer_class = serializers.ProfileListSerializer
     filter_backends = [filters.OrderingFilter, DjangoFilterBackend]
-    filterset_fields = ["owner__followers", "following"]
+    filterset_fields = ["followers", "following"]
     ordering_fields = ["owner", "popularity"]
 
     def get_queryset(self):
@@ -42,7 +42,7 @@ class ProfileList(generics.ListAPIView):
         )
 
 
-class SavedPostsList(generics.RetrieveUpdateAPIView):
-    serializer_class = serializers.SavedPostsSerializer
+class SavedFollowing(generics.RetrieveUpdateAPIView):
+    serializer_class = serializers.SavedFollowingSerializer
     permission_classes = [IsOwnerOrReadOnly]
     queryset = Profile.objects.all()

@@ -18,7 +18,7 @@ class Profile(models.Model):
         default="/profiles/default/placeholder",
     )
     following = models.ManyToManyField(
-        User, related_name="followers", blank=True
+        "self", related_name="followers", blank=True, symmetrical=False
     )
     saved_posts = models.ManyToManyField(
         Post, related_name="post_saves", blank=True

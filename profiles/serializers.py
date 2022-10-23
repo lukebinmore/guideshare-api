@@ -50,7 +50,7 @@ class ProfileListSerializer(serializers.ModelSerializer):
         )
 
 
-class SavedPostsSerializer(serializers.ModelSerializer):
+class SavedFollowingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = ["following"]
+        fields = ["saved_posts", "following"]
