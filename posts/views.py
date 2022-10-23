@@ -21,7 +21,12 @@ class PostList(generics.ListAPIView):
         "likes_count",
         "dislikes_count",
     ]
-    filterset_fields = ["owner__followers", "post_saves", "category"]
+    filterset_fields = [
+        "owner__profile__followers",
+        "post_saves",
+        "category",
+        "wip",
+    ]
     search_fields = ["title", "owner__username", "category__title"]
 
     queryset = Post.objects.annotate(
