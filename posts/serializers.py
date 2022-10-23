@@ -63,6 +63,7 @@ class PostListSerializer(serializers.ModelSerializer):
             "title",
             "category_title",
             "cover_image",
+            "wip",
             "likes_count",
             "dislikes_count",
         ]
