@@ -23,6 +23,7 @@ class PostList(generics.ListAPIView):
     ]
     filterset_fields = [
         "owner__profile__followers",
+        "owner",
         "post_saves",
         "category",
         "wip",
