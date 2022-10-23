@@ -14,7 +14,7 @@ class VoteCreate(generics.CreateAPIView):
         serializer.save(owner=self.request.user)
 
 
-class VoteRetrieveDestroy(generics.RetrieveDestroyAPIView):
+class VoteDestroy(generics.DestroyAPIView):
     serializer_class = serializers.VoteSerializer
     permission_classes = [IsOwnerOrReadOnly]
     queryset = Vote.objects.all()
