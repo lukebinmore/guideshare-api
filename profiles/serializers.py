@@ -48,3 +48,9 @@ class ProfileListSerializer(serializers.ModelSerializer):
             "created_at",
             "followed",
         )
+
+
+class SavedPostsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = ["following"]

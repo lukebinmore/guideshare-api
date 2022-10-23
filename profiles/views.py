@@ -40,3 +40,9 @@ class ProfileList(generics.ListAPIView):
             )
             .order_by("owner")
         )
+
+
+class SavedPostsList(generics.RetrieveUpdateAPIView):
+    serializer_class = serializers.SavedPostsSerializer
+    permission_classes = [IsOwnerOrReadOnly]
+    queryset = Profile.objects.all()
