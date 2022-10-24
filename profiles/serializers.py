@@ -32,11 +32,6 @@ class ProfileDetailSerializer(serializers.ModelSerializer):
 class ProfileListSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source="owner.username")
     post_count = serializers.ReadOnlyField(default=0)
-    followed = serializers.SerializerMethodField()
-
-    def get_followed(self, obj):
-        user = self.context["request"].user
-        return True if obj.owner.followers.filter(owner=user) else False
 
     class Meta:
         model = Profile
@@ -46,7 +41,6 @@ class ProfileListSerializer(serializers.ModelSerializer):
             "post_count",
             "picture",
             "created_at",
-            "followed",
         )
 
 
