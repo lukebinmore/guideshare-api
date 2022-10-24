@@ -23,23 +23,19 @@ class ProfileList(generics.ListAPIView):
     ordering_fields = ["owner", "popularity"]
 
     def get_queryset(self):
-        return (
-            Profile.objects.exclude(owner=self.request.user)
-            .annotate(
-                post_count=Count("owner__posts", distinct=True),
-                popularity=Count(
-                    "owner__posts__post_votes",
-                    filter=Q(owner__posts__post_votes__vote=0),
-                    distinct=True,
-                )
-                - Count(
-                    "owner__posts__post_votes",
-                    filter=Q(owner__posts__post_votes__vote=1),
-                    distinct=True,
-                ),
+        return Profile.objects.annotate(
+            post_count=Count("owner__posts", distinct=True),
+            popularity=Count(
+                "owner__posts__post_votes",
+                filter=Q(owner__posts__post_votes__vote=0),
+                distinct=True,
             )
-            .order_by("owner")
-        )
+            - Count(
+                "owner__posts__post_votes",
+                filter=Q(owner__posts__post_votes__vote=1),
+                distinct=True,
+            ),
+        ).order_by("popularity")
 
 
 class SavedFollowing(generics.RetrieveUpdateAPIView):
