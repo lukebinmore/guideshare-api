@@ -15,6 +15,12 @@ class ProfileDetail(generics.RetrieveUpdateDestroyAPIView):
         followers_count=Count("followers", distinct=True),
     )
 
+    def perform_destroy(self, obj):
+        user = self.request.user
+        obj.delete()
+        user.is_active = False
+        user.save()
+
 
 class ProfileList(generics.ListAPIView):
     serializer_class = serializers.ProfileListSerializer
