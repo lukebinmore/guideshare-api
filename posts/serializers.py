@@ -24,13 +24,15 @@ class PostSerializer(serializers.ModelSerializer):
         user = self.context["request"].user
         if user.is_authenticated:
             like = Vote.objects.filter(owner=user, post=obj, vote=0).first()
-        return like.id if like else None
+            return like.id if like else None
+        return None
 
     def get_dislike_id(self, obj):
         user = self.context["request"].user
         if user.is_authenticated:
             dislike = Vote.objects.filter(owner=user, post=obj, vote=1).first()
-        return dislike.id if dislike else None
+            return dislike.id if dislike else None
+        return None
 
     def validate_cover_image(self, value):
         if value.size > 1024 * 1024 * 5:
