@@ -22,7 +22,8 @@ class CommentSerializer(serializers.ModelSerializer):
         user = self.context["request"].user
         if user.is_authenticated:
             like = Vote.objects.filter(owner=user, comment=obj, vote=0).first()
-        return like.id if like else None
+            return like.id if like else None
+        return None
 
     def get_dislike_id(self, obj):
         user = self.context["request"].user
@@ -30,7 +31,8 @@ class CommentSerializer(serializers.ModelSerializer):
             dislike = Vote.objects.filter(
                 owner=user, comment=obj, vote=1
             ).first()
-        return dislike.id if dislike else None
+            return dislike.id if dislike else None
+        return None
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
