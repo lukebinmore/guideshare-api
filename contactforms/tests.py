@@ -2,6 +2,7 @@ from rest_framework.test import APITestCase
 from rest_framework import status
 
 
+# Tests for the comment form view
 class ContactFormViewTest(APITestCase):
     def test_can_submit_valid_form(self):
         response = self.client.post(

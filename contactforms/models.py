@@ -1,5 +1,4 @@
 from django.db import models
-from django.contrib.auth.models import User
 
 REASON_CHOICES = (
     (0, "Support"),
@@ -17,6 +16,7 @@ STATUS_CHOICES = (
 )
 
 
+# It creates a model for Contact Forms
 class ContactForm(models.Model):
     title = models.CharField(max_length=50)
     username = models.CharField(max_length=25, blank=True, null=True)
@@ -32,4 +32,8 @@ class ContactForm(models.Model):
         ordering = ("created_at",)
 
     def __str__(self):
+        """
+        The __str__ method should return a string representation of the object
+        :return: The owner's name and the comment's id.
+        """
         return self.title
