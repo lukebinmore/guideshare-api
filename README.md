@@ -43,8 +43,17 @@ Please [Click Here](https://github.com/lukebinmore/guideshare) to view the Guide
 
 ## **Mentions**
 
+A special thanks to the very helpful people over on the forums listed below.
+
+ - [StackOverflow](https://stackoverflow.com/)
+   - Information and assisting with found bugs during development.
+ - [MDN](https://developer.mozilla.org/en-US/)
+   - Information utilized in implementing features and resolving bugs.
+
 ***
 
 ## **Credits**
+
+The code used in this project has been created by myself, unless otherwise specified here. Library specific code such as rest framework serializers are the work of their development teams.
 
 ***
