@@ -2,6 +2,7 @@ from django.contrib import admin
 from .models import Vote
 
 
+# Registering the model Vote to the admin site.
 @admin.register(Vote)
 class VoteAdmin(admin.ModelAdmin):
     list_display = (

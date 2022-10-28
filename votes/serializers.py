@@ -3,6 +3,7 @@ from rest_framework import serializers
 from .models import Vote
 
 
+# Serializer for votes
 class VoteSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source="owner.username")
 
@@ -11,6 +12,15 @@ class VoteSerializer(serializers.ModelSerializer):
         fields = ["id", "owner", "post", "comment", "vote"]
 
     def create(self, validated_data):
+        """
+        If the super() method raises an IntegrityError, then raise a
+        ValidationError
+
+        :param validated_data: The data that has been validated and is ready
+        to be saved
+        :return: The super().create(validated_data) is returning the instance
+        of the model.
+        """
         try:
             return super().create(validated_data)
         except IntegrityError:

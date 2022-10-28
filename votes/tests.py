@@ -6,6 +6,7 @@ from comments.models import Comment
 from django.contrib.auth.models import User
 
 
+# Tests for the vote create view
 class VoteCreateViewTests(APITestCase):
     def setUp(self):
         User.objects.create_user(username="peter", password="pass")
@@ -46,8 +47,12 @@ class VoteCreateViewTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
 
+# Tests for the vote delete view
 class VoteDestroyViewTests(APITestCase):
     def setUp(self):
+        """
+        Setup for following view tests
+        """
         User.objects.create_user(username="peter", password="pass")
         peter = User.objects.get(username="peter")
         Category.objects.create(title="Category Title")
