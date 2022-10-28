@@ -20,6 +20,13 @@ For bugs found and fixed during the development of this project, please [Click H
 
 ## **Automated Testing**
 
+At the endpoint of the project, before finalization. A series of tests were carried out to ensure the API functioned as expected. These include:
+
+ - [Flake8 Linting](https://flake8.pycqa.org/en/latest/) - To ensure that the python code meets industry standards.
+   - All python files follow flake8 industry standards.
+ - Unit Testing - To ensure that all code behaves as expected.
+   - All tests passed as expected.
+
 ***
 
 ## **Manual Testing**

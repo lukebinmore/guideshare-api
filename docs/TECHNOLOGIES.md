@@ -44,6 +44,8 @@
    - Static file storage & image hosting.
  - [Heroku](https://heroku.com)
    - Deployment & database hosting platform.
+ - [Flake8](https://flake8.pycqa.org/en/latest/)
+   - Used to maintain code standards.
 
 ***
 
