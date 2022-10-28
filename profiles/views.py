@@ -6,9 +6,13 @@ from . import serializers
 from guideshareapi.permissions import IsOwnerOrReadOnly
 
 
+# This class is a generic view that allows us to retrieve, update, and delete a
+# profile
 class ProfileDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = serializers.ProfileDetailSerializer
     permission_classes = [IsOwnerOrReadOnly]
+    # Annotating the queryset with the number of posts, following, and
+    # followers.
     queryset = Profile.objects.annotate(
         post_count=Count("owner__posts", distinct=True),
         following_count=Count("following", distinct=True),
@@ -16,12 +20,20 @@ class ProfileDetail(generics.RetrieveUpdateDestroyAPIView):
     )
 
     def perform_destroy(self, obj):
+        """
+        It deletes the object and then sets the user's is_active field to False
+
+        :param obj: The object that is being deleted
+        """
         user = self.request.user
         obj.delete()
         user.is_active = False
         user.save()
 
 
+# This class is a list view that returns a list of profiles, and allows
+# filtering by followers, following, ordering by owner, and ordering by
+# popularity.
 class ProfileList(generics.ListAPIView):
     serializer_class = serializers.ProfileListSerializer
     filter_backends = [filters.OrderingFilter, DjangoFilterBackend]
@@ -29,6 +41,12 @@ class ProfileList(generics.ListAPIView):
     ordering_fields = ["owner", "popularity"]
 
     def get_queryset(self):
+        """
+        Get all the profiles, annotate them with the number of posts they have
+        and the popularity of their posts, and order them by popularity
+        :return: A queryset of Profile objects, annotated with the number of
+        posts and the popularity of the user.
+        """
         return Profile.objects.annotate(
             post_count=Count("owner__posts", distinct=True),
             popularity=Count(
@@ -44,6 +62,8 @@ class ProfileList(generics.ListAPIView):
         ).order_by("popularity")
 
 
+# This class will allow us to retrieve and update users saved posts and
+# following fields
 class SavedFollowing(generics.RetrieveUpdateAPIView):
     serializer_class = serializers.SavedFollowingSerializer
     permission_classes = [IsOwnerOrReadOnly]

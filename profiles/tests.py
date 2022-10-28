@@ -4,8 +4,12 @@ from .models import Profile
 from django.contrib.auth.models import User
 
 
+# Tests for the profile detail view
 class ProfileDetailViewTests(APITestCase):
     def setUp(self):
+        """
+        Setup for following view tests
+        """
         User.objects.create_user(username="peter", password="pass")
         User.objects.create_user(username="steve", password="pass")
 
@@ -44,8 +48,12 @@ class ProfileDetailViewTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
 
+# Tests for the profile list view
 class ProfileListViewTests(APITestCase):
     def setUp(self):
+        """
+        Setup for following view tests
+        """
         User.objects.create_user(username="peter", password="pass")
         User.objects.create_user(username="steve", password="pass")
         User.objects.create_user(username="paul", password="pass")
@@ -66,8 +74,12 @@ class ProfileListViewTests(APITestCase):
         self.assertEqual(response.data["count"], 2)
 
 
+# Tests for the saved following view
 class SavedFollowingViewTests(APITestCase):
     def setUp(self):
+        """
+        Setup for following view tests
+        """
         User.objects.create_user(username="peter", password="pass")
         User.objects.create_user(username="steve", password="pass")
         User.objects.create_user(username="paul", password="pass")

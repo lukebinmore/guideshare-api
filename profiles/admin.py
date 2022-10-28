@@ -2,6 +2,7 @@ from django.contrib import admin
 from .models import Profile
 
 
+# Registering the Profile model with the admin site.
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
     list_display = (
