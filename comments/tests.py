@@ -5,8 +5,12 @@ from posts.models import Post, Category
 from django.contrib.auth.models import User
 
 
+# Tests for the comment list view
 class CommentListViewTests(APITestCase):
     def setUp(self):
+        """
+        Setup for following view tests
+        """
         peter = User.objects.create_user(username="peter", password="pass")
         Category.objects.create(id=1, title="Category Title")
         category = Category.objects.get(id=1)
@@ -62,8 +66,12 @@ class CommentListViewTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
 
+# Tests for the comment detail view
 class CommentDetailViewTests(APITestCase):
     def setUp(self):
+        """
+        Setup for following view tests
+        """
         peter = User.objects.create_user(username="peter", password="pass")
         steve = User.objects.create_user(username="steve", password="pass")
         Category.objects.create(id=1, title="Category Title")

@@ -3,6 +3,7 @@ from .models import Comment
 from votes.models import Vote
 
 
+# Serializer for a list of comments
 class CommentSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source="owner.username")
     is_owner = serializers.SerializerMethodField()
@@ -16,9 +17,24 @@ class CommentSerializer(serializers.ModelSerializer):
     dislike_id = serializers.SerializerMethodField()
 
     def get_is_owner(self, obj):
+        """
+        If the user making the request is the same as the owner of the object,
+        return True. Otherwise, return False
+
+        :param obj: The object that the serializer is being applied to
+        :return: The user that is logged in is being compared to the owner of
+        the object.
+        """
         return self.context["request"].user == obj.owner
 
     def get_like_id(self, obj):
+        """
+        If the user is authenticated, return the id of the like if it exists,
+        otherwise return None
+
+        :param obj: The object that the serializer is being used to serialize
+        :return: The id of the like object if it exists, otherwise None.
+        """
         user = self.context["request"].user
         if user.is_authenticated:
             like = Vote.objects.filter(owner=user, comment=obj, vote=0).first()
@@ -26,6 +42,13 @@ class CommentSerializer(serializers.ModelSerializer):
         return None
 
     def get_dislike_id(self, obj):
+        """
+        If the user is authenticated, return the id of the dislike if it
+        exists, otherwise return None
+
+        :param obj: The object that the serializer is being applied to
+        :return: The id of the vote object.
+        """
         user = self.context["request"].user
         if user.is_authenticated:
             dislike = Vote.objects.filter(
@@ -35,6 +58,11 @@ class CommentSerializer(serializers.ModelSerializer):
         return None
 
     def perform_create(self, serializer):
+        """
+        It sets the owner on save
+
+        :param serializer: The serializer instance that should be saved
+        """
         serializer.save(owner=self.request.user)
 
     class Meta:
@@ -42,5 +70,6 @@ class CommentSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
+# Serializer for comment details
 class CommentDetailSerializer(CommentSerializer):
     post = serializers.ReadOnlyField(source="post.id")
