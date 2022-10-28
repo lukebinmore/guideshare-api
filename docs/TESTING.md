@@ -31,4 +31,17 @@ At the endpoint of the project, before finalization. A series of tests were carr
 
 ## **Manual Testing**
 
+Manual testing of the code and the API was carried out during the development of the project. Below is a summary of the manual testing completed during and after project finalization.
+
+ - Response Data
+   - All views were checked for correct and appropriate response data.
+ - Error handling
+   - All views were checked for error handling and appropriate data validation.
+ - Data Duplication
+   - All views were tested for duplication issues where relevent, and confirmed to handle it correctly.
+ - Permissions
+   - All views were checked for appropriate access permissions.
+ - Admin Panel
+   - The admin panel was checked for appropriate content, making sure that all neccessary data is accessible.
+
 ***
