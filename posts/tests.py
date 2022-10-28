@@ -4,8 +4,12 @@ from .models import Post, Category
 from django.contrib.auth.models import User
 
 
+# Tests for the post list view
 class PostListViewTests(APITestCase):
     def setUp(self):
+        """
+        Setup for following view tests
+        """
         User.objects.create_user(username="peter", password="pass")
         peter = User.objects.get(username="peter")
         Category.objects.create(title="Category Title")
@@ -49,6 +53,9 @@ class PostListViewTests(APITestCase):
 
 class PostDetailViewTest(APITestCase):
     def setUp(self):
+        """
+        Setup for following view tests
+        """
         User.objects.create_user(username="peter", password="pass")
         User.objects.create_user(username="steve", password="pass")
         peter = User.objects.get(username="peter")
@@ -110,6 +117,9 @@ class PostDetailViewTest(APITestCase):
 
 class PostCreateViewTest(APITestCase):
     def setUp(self):
+        """
+        Setup for following view tests
+        """
         User.objects.create_user(username="peter", password="pass")
         Category.objects.create(title="Category Title")
 
@@ -139,6 +149,9 @@ class PostCreateViewTest(APITestCase):
 
 class CategoryListViewTests(APITestCase):
     def setUp(self):
+        """
+        Setup for following view tests
+        """
         Category.objects.create(title="Windows 11 Tips")
         Category.objects.create(title="Mac OSX Tips")
 

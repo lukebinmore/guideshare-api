@@ -7,6 +7,8 @@ from guideshareapi.permissions import IsOwnerOrReadOnly
 from rest_framework.permissions import IsAuthenticated
 
 
+# This class is a list view that returns a list of posts, and allows for
+# ordering, filtering, and searching
 class PostList(generics.ListAPIView):
     serializer_class = serializers.PostListSerializer
     filter_backends = [
@@ -30,6 +32,7 @@ class PostList(generics.ListAPIView):
     ]
     search_fields = ["title", "owner__username", "category__title"]
 
+    # Annotating the queryset with the number of likes, dislikes and comments.
     queryset = Post.objects.annotate(
         likes_count=Count(
             "post_votes", filter=Q(post_votes__vote=0), distinct=True
@@ -41,9 +44,11 @@ class PostList(generics.ListAPIView):
     ).order_by("-created_at")
 
 
+# This class will allow us to retrieve, update, and delete posts
 class PostDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = serializers.PostSerializer
     permission_classes = [IsOwnerOrReadOnly]
+    # Annotating the queryset with the number of likes, dislikes and comments.
     queryset = Post.objects.annotate(
         likes_count=Count(
             "post_votes", filter=Q(post_votes__vote=0), distinct=True
@@ -55,15 +60,22 @@ class PostDetail(generics.RetrieveUpdateDestroyAPIView):
     )
 
 
+# This class will allow us to create posts
 class PostCreate(generics.CreateAPIView):
     serializer_class = serializers.PostSerializer
     permission_classes = [IsAuthenticated]
     queryset = Post.objects.all()
 
     def perform_create(self, serializer):
+        """
+        It sets the post owner on createion
+
+        :param serializer: The serializer instance that should be saved
+        """
         serializer.save(owner=self.request.user)
 
 
+# A class based view that lists all posts
 class CategoryList(generics.ListAPIView):
     serializer_class = serializers.CategoryListSerializer
     queryset = Category.objects.all().order_by("title")
