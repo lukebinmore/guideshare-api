@@ -11,6 +11,7 @@ Please [Click Here](https://github.com/lukebinmore/guideshare) to view the Guide
 - [GuideShare API](#guideshare-api)
   - [**Planning Phase**](#planning-phase)
   - [**Database Scheme**](#database-scheme)
+  - [**Features**](#features)
   - [**Testing Results**](#testing-results)
   - [**Technologies Used**](#technologies-used)
   - [**Deployment**](#deployment)
@@ -26,6 +27,10 @@ Please [Click Here](https://github.com/lukebinmore/guideshare) to view the Guide
 ***
 
 ## [**Database Scheme**](/docs/DATABASESCHEME.md)
+
+***
+
+## [**Features**](/docs/FEATURES.md)
 
 ***
 
